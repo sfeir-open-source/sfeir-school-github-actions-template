@@ -1,9 +1,8 @@
 name: npm test
-on: 
+on:
   workflow_dispatch:
-               
 jobs:
-  job1:
+  job-one:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -12,5 +11,17 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: lts/*
-      - name: install-npm-action
+      - name: npm-action-install
         run: npm install
+  job-two:
+    needs: job-one
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: setup-node-version
+        uses: actions/setup-node@v3
+        with:
+          node-version: lts/*
+      - name: npm-action-test
+        run: npm test
