@@ -15,3 +15,14 @@ jobs:
         run: npm install
       - name: npm-action-test
         run: npm test
+  job-two:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: setup-node-version
+        uses: actions/setup-node@v3
+        with:
+          node-version: lts/*
+      - name: npm-action-install-and-test
+        run: npm install && npm test
